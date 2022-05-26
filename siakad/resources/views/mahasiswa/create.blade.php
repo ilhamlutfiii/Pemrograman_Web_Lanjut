@@ -28,24 +28,17 @@
                     </div>
                     <div class="form-group">
                         <label for="Kelas">Kelas</label>
-                        <input type="Kelas" name="Kelas" class="form-control" id="Kelas" ariadescribedby="password">
+                        <select class="form-control">
+                            @foreach($kelas as $kls)
+                                <option value="{{$kls->id}}">{{$kls->nama_kelas}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="Jurusan">Jurusan</label>
                         <input type="Jurusan" name="Jurusan" class="form-control" id="Jurusan" ariadescribedby="Jurusan">
                     </div>
-                    <div class="form-group">
-                        <label for="E-mail">E-mail</label>
-                        <input type="E-mail" name="E-mail" class="form-control" id="E-mail" aria-describedby="E-mail">
-                    </div>
-                    <div class="form-group">
-                        <label for="Alamat">Alamat</label>
-                        <input type="Alamat" name="Alamat" class="form-control" id="Alamat" aria-describedby="Alamat">
-                    </div>
-                    <div class="form-group">
-                        <label for="TTL">TTL</label>
-                        <input type="TTL" name="TTL" class="form-control" id="TTL" aria-describedby="TTL">
-                    </div>
+                    
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

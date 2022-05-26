@@ -20,20 +20,16 @@
         <th>Nama</th>
         <th>Kelas</th>
         <th>Jurusan</th>
-        <th>E-mail</th>
-        <th>Alamat</th>
-        <th>TTL</th>
+        
         <th width="280px">Action</th>
     </tr>
-    @foreach ($mahasiswa as $mhs)
+    @foreach ($paginate as $mhs)
     <tr>
-        <td>{{ $mhs ->nim }}</td>
-        <td>{{ $mhs ->nama }}</td>
-        <td>{{ $mhs ->kelas }}</td>
-        <td>{{ $mhs ->jurusan }}</td>
-        <td>{{ $mhs ->e-mail }}</td>
-        <td>{{ $mhs ->alamat }}</td>
-        <td>{{ $mhs ->ttl }}</td>
+        <td>{{ $mhs->nim }}</td>
+        <td>{{ $mhs->nama }}</td>
+        <td>{{ $mhs->kelas->nama_kelas }}</td>
+        <td>{{ $mhs->jurusan }}</td>
+        
         <td>
             <form action="{{ route('mahasiswa.destroy',['mahasiswa'=>$mhs->nim]) }}" method="POST">
                 <a class="btn btn-info" href="{{ route('mahasiswa.show',$mhs->nim) }}">Show</a>
