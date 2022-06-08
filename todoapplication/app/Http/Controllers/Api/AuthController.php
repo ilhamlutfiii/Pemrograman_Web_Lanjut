@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
 use App\Traits\ApiResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Hash;
-use App\Http\Controllers\Api\User;
-
+use Illuminate\Http\Response;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
+//use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -20,15 +20,15 @@ class AuthController extends Controller
     {
         $validated = $request->validated();
         $user = User::create([
-            'name'=>$validated['name'],
-            'email'=>$validated['email'],
-            'password'=>Hash::make($validated['password']),
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password'])
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
         return $this->apiSuccess([
             'token'=> $token,
             'token_type'=> 'Bearer',
-            'user'=> $user,
+            'user'=> $user
         ]);
     }
 
@@ -44,7 +44,20 @@ class AuthController extends Controller
         return $this->apiSuccess([
             'token'=>$token,
             'token_type'=>'Bearer',
-            'user'=>$user,
+            'user'=>$user
         ]);
     }
+
+    // public function logout()
+    // {
+    //     try{
+    //         //auth()->user()->tokens()->delete();
+    //         return $this->apiSuccess('Token revoked');
+    //     } catch (\Throwable $e){
+    //         throw new HttpResponseException($this->apiError(
+    //             null,
+    //             Response::HTTP_INTERNAL_SERVER_ERROR,
+    //         ));
+    //     }
+    // }
 }
